@@ -1,0 +1,8 @@
+# Ignore Bazel output
+bazel-bin
+bazel-out
+bazel-testlogs
+bazel-*
+
+# Ignore IntelliJ IDEA files
+.ijwb

@@ -1,0 +1,15 @@
+###############################################################################
+# Bazel now uses Bzlmod by default to manage external dependencies.
+# Please consider migrating your external dependencies from WORKSPACE to MODULE.bazel.
+#
+# For more details, please check https://github.com/bazelbuild/bazel/issues/18958
+###############################################################################
+
+## MODULE.bazel
+module(
+    name = "skintracker",
+    repo_name = "io_skintracker",
+)
+
+bazel_dep(name = "rules_jvm_external", version = "5.3")
+bazel_dep(name = "rules_kotlin", version = "1.9.0")

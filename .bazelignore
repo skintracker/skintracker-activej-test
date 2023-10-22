@@ -1,0 +1,7 @@
+.ijwb
+bazel-activej-bazel-kt
+bazel-bin
+bazel-genfiles
+bazel-out
+bazel-testlogs
+bazel-skintracker-activej-test
