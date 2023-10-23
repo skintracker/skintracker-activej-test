@@ -5,11 +5,46 @@
 # For more details, please check https://github.com/bazelbuild/bazel/issues/18958
 ###############################################################################
 
-## MODULE.bazel
-module(
-    name = "skintracker",
-    repo_name = "io_skintracker",
-)
-
 bazel_dep(name = "rules_jvm_external", version = "5.3")
 bazel_dep(name = "rules_kotlin", version = "1.9.0")
+bazel_dep(name = "rules_graalvm", version = "0.10.3")
+
+gvm = use_extension("@rules_graalvm//:extensions.bzl", "graalvm")
+
+gvm.graalvm(
+    name = "graalvm",
+    version = "20.0.2",  # earlier version format like `22.x` also supported
+    distribution = "oracle",  # `oracle`, `ce`, or `community`
+    java_version = "20",  # `17`, `20`, or `21`, as supported by the version provided
+    components = [
+       # if you need components like `js` or `wasm`, add them here
+    ],
+)
+use_repo(gvm, "graalvm")
+register_toolchains("@graalvm//:jvm")
+register_toolchains("@graalvm//:sdk")
+
+maven = use_extension("@rules_jvm_external//:extensions.bzl", "maven")
+maven.install(
+    artifacts = [
+        # This line is an example coordinate, you'd copy-paste your actual dependencies here
+        # from your build.gradle or pom.xml file.
+        "org.jetbrains.kotlin:kotlin-test:1.9.10",
+        "org.jetbrains.kotlin:kotlin-test-junit:1.9.10",
+        "io.activej:activej-common:5.5",
+        "io.activej:activej-http:5.5",
+        "io.activej:activej-inject:5.5",
+        "io.activej:activej-launcher:5.5",
+        "io.activej:activej-launchers-http:5.5",
+        "io.activej:activej-promise:5.5",
+        "io.jstach:jstachio:1.3.3",
+        "org.junit.jupiter:junit-jupiter:5.10.0",
+        "org.junit.jupiter:junit-jupiter-api:5.10.0",
+        "org.junit.jupiter:junit-jupiter-engine:5.10.0",
+        "org.junit.platform:junit-platform-console:1.10.0",
+        "org.apache.logging.log4j:log4j-api:2.21.0",
+        "org.apache.logging.log4j:log4j-core:2.21.0",
+        "org.apache.logging.log4j:log4j-slf4j-impl:2.21.0",
+    ],
+)
+use_repo(maven, "maven")
