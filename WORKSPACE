@@ -1,6 +1,4 @@
 ## WORKSPACE
-workspace(name = "io_skintracker")
-
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 load("@bazel_tools//tools/jdk:remote_java_repository.bzl", "remote_java_repository")
 
@@ -52,6 +50,9 @@ maven_install(
         "org.junit.jupiter:junit-jupiter-api:5.10.0",
         "org.junit.jupiter:junit-jupiter-engine:5.10.0",
         "org.junit.platform:junit-platform-console:1.10.0",
+        "org.apache.logging.log4j:log4j-api:2.21.0",
+        "org.apache.logging.log4j:log4j-core:2.21.0",
+        "org.apache.logging.log4j:log4j-slf4j-impl:2.21.0",
     ],
     repositories = [
         "https://maven.google.com",
